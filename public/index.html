@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGA-UT | Sistema Integrado de Gestión Académica — Universidad del Tolima (IDEAD)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ut-crimson: #A6192E;
+            --ut-crimson-dark: #6E0E1D;
+            --ut-crimson-light: #FDF2F4;
+            --ut-gold: #D4AF37;
+            --ut-charcoal: #181C20;
+            --bg-body: #F1F4F8;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: #1E293B;
+        }
+
+        .ut-hero-header {
+            background: linear-gradient(120deg, var(--ut-crimson-dark) 0%, var(--ut-crimson) 55%, #8F1326 100%);
+            border-bottom: 4px solid var(--ut-gold);
+            color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ut-emblem {
+            width: 60px;
+            height: 60px;
+            background: #FFFFFF;
+            color: var(--ut-crimson);
+            border: 2px solid var(--ut-gold);
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .ut-emblem span {
+            font-weight: 800;
+            font-size: 1.25rem;
+            line-height: 1;
+        }
+
+        .ut-emblem small {
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: #64748B;
+            margin-top: 2px;
+        }
+
+        .subnav-bar {
+            background: #FFFFFF;
+            border-bottom: 1px solid #E2E8F0;
+            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+        }
+
+        .nav-tabs-ut .nav-link {
+            color: #475569;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            border-bottom: 3px solid transparent;
+            padding: 0.85rem 1.15rem;
+        }
+
+        .nav-tabs-ut .nav-link:hover {
+            color: var(--ut-crimson);
+            background-color: var(--ut-crimson-light);
+        }
+
+        .nav-tabs-ut .nav-link.active {
+            color: var(--ut-crimson);
+            background-color: transparent;
+            border-bottom: 3px solid var(--ut-crimson);
+        }
+
+        .kpi-box {
+            background: #FFFFFF;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
+            border-top: 4px solid var(--ut-crimson);
+            transition: transform 0.2s ease;
+        }
+
+        .kpi-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .kpi-icon-wrap {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+        }
+
+        .query-item {
+            border: none;
+            border-bottom: 1px solid #F1F5F9;
+            border-left: 4px solid transparent;
+            font-size: 0.88rem;
+            padding: 0.72rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .query-item:hover {
+            background-color: #F8FAFC;
+            border-left-color: var(--ut-gold);
+        }
+
+        .query-item.active-query {
+            background-color: var(--ut-crimson);
+            color: #FFFFFF;
+            border-left-color: var(--ut-gold);
+            font-weight: 600;
+        }
+
+        .query-item.active-query .badge-q {
+            background-color: rgba(255, 255, 255, 0.2) !important;
+            color: #FFFFFF !important;
+        }
+
+        .sql-console {
+            background-color: #0F172A;
+            color: #38BDF8;
+            border-radius: 10px;
+            border-left: 4px solid var(--ut-gold);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+        }
+
+        .btn-ut {
+            background-color: var(--ut-crimson);
+            border-color: var(--ut-crimson);
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        .btn-ut:hover, .btn-ut:focus {
+            background-color: var(--ut-crimson-dark);
+            border-color: var(--ut-crimson-dark);
+            color: #FFFFFF;
+        }
+
+        .card-modern {
+            background: #FFFFFF;
+            border-radius: 14px;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
+        }
+
+        .program-header-card {
+            background: linear-gradient(90deg, #1E293B 0%, #334155 100%);
+            color: white;
+            border-left: 5px solid var(--ut-gold);
+        }
+
+        .table-modern thead th {
+            background-color: var(--ut-charcoal);
+            color: #F8FAFC;
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.75rem 0.9rem;
+            border: none;
+        }
+
+        footer {
+            background-color: var(--ut-charcoal);
+            color: #94A3B8;
+            border-top: 4px solid var(--ut-crimson);
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- ENCABEZADO INSTITUCIONAL UNIVERSIDAD DEL TOLIMA -->
+    <header class="ut-hero-header py-3 shadow">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="ut-emblem">
+                        <span>UT</span>
+                        <small>1945</small>
+                    </div>
+                    <div>
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <h4 class="mb-0 fw-bold">UNIVERSIDAD DEL TOLIMA</h4>
+                            <span class="badge bg-warning text-dark fw-bold" style="font-size: 0.68rem;">IDEAD • CAT IBAGUÉ</span>
+                        </div>
+                        <p class="mb-0 text-white-50 small">
+                            Sistema Integrado de Gestión Académica • <em>"Una nueva historia"</em>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Estado de Sesión (Docente o Estudiante) -->
+                <div class="d-flex flex-column align-items-md-end gap-2">
+                    <div id="zonaSesion"></div>
+                    <span class="badge bg-dark bg-opacity-50 border border-light border-opacity-25 rounded-pill px-3 py-1 font-monospace" style="font-size: 0.72rem;">
+                        <i class="bi bi-database-fill-check text-info me-1"></i>PostgreSQL: asistencia_db
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- BARRA DE ADVERTENCIA MODO LECTURA -->
+    <div id="bannerPermisos" class="bg-warning-subtle border-bottom border-warning py-2">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2 small">
+            <div class="text-dark">
+                <i class="bi bi-shield-lock-fill text-danger me-1"></i>
+                <strong>Portal Académico:</strong> Inicia sesión como <strong>Docente</strong> para gestionar notas, programas y materias, o como <strong>Estudiante</strong> para consultar tu boletín individual.
+            </div>
+            <button class="btn btn-sm btn-dark fw-semibold px-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalAuth">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
+            </button>
+        </div>
+    </div>
+
+    <!-- PANEL EXCLUSIVO: BOLETÍN DEL ESTUDIANTE AUTENTICADO -->
+    <section id="panelBoletinEstudiante" class="container mt-4 d-none">
+        <div class="card-modern overflow-hidden border-primary shadow">
+            <div class="p-3 bg-primary text-white d-flex justify-content-between align-items-center">
+                <div class="fw-bold">
+                    <i class="bi bi-person-vcard-fill me-2"></i>Mi Boletín Académico Oficial — Portal Estudiantil UT
+                </div>
+                <button class="btn btn-sm btn-light text-primary fw-semibold" onclick="actualizarBoletinEstudiante()">
+                    <i class="bi bi-arrow-clockwise me-1"></i>Actualizar Nota
+                </button>
+            </div>
+            <div class="p-4" id="contenidoBoletin"></div>
+        </div>
+    </section>
+
+    <!-- SUBBARRA DE NAVEGACIÓN POR PESTAÑAS -->
+    <div class="subnav-bar sticky-top mt-2">
+        <div class="container">
+            <ul class="nav nav-tabs nav-tabs-ut border-0" id="tabsPrincipales" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#paneAnalitica" type="button">
+                        <i class="bi bi-bar-chart-line-fill me-2"></i>1. Analítica SQL (Q1 - Q9)
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#paneEstudiantes" type="button">
+                        <i class="bi bi-people-fill me-2"></i>2. Estudiantes por Programa y Notas
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#paneProgramas" type="button">
+                        <i class="bi bi-diagram-3-fill me-2"></i>3. Programas Académicos
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#paneAcademico" type="button">
+                        <i class="bi bi-building-gear me-2"></i>4. Materias, Docentes y Aulas
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="container my-4 flex-grow-1">
+
+        <!-- FILA DE INDICADORES CLAVE (KPIs) -->
+        <div class="row g-3 mb-4">
+            <div class="col-6 col-lg-3">
+                <div class="kpi-box p-3 shadow-sm h-100">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-muted small fw-bold text-uppercase">Estudiantes</span>
+                            <h2 class="mb-0 fw-extrabold mt-1" id="kpiEstudiantes">-</h2>
+                        </div>
+                        <div class="kpi-icon-wrap bg-danger-subtle text-danger"><i class="bi bi-people-fill"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="kpi-box p-3 shadow-sm h-100" style="border-top-color: #198754;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-muted small fw-bold text-uppercase">Promedio General</span>
+                            <h2 class="mb-0 fw-extrabold text-success mt-1" id="kpiPromedio">-</h2>
+                        </div>
+                        <div class="kpi-icon-wrap bg-success-subtle text-success"><i class="bi bi-graph-up-arrow"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="kpi-box p-3 shadow-sm h-100" style="border-top-color: #0D6EFD;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-muted small fw-bold text-uppercase">Programas</span>
+                            <h2 class="mb-0 fw-extrabold text-primary mt-1" id="kpiProgramas">-</h2>
+                        </div>
+                        <div class="kpi-icon-wrap bg-primary-subtle text-primary"><i class="bi bi-mortarboard-fill"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="kpi-box p-3 shadow-sm h-100" style="border-top-color: var(--ut-gold);">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-muted small fw-bold text-uppercase">Materias / Aulas</span>
+                            <h2 class="mb-0 fw-extrabold text-dark mt-1" id="kpiMateriasAulas">-</h2>
+                        </div>
+                        <div class="kpi-icon-wrap bg-warning-subtle text-warning"><i class="bi bi-buildings-fill"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENIDO DE LAS 4 PESTAÑAS -->
+        <div class="tab-content">
+
+            <!-- =================================================================
+                 PESTAÑA 1: ANALÍTICA SQL (Q1 A Q9)
+            ================================================================== -->
+            <div class="tab-pane fade show active" id="paneAnalitica">
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <div class="card-modern overflow-hidden">
+                            <div class="p-3 bg-dark text-white d-flex justify-content-between align-items-center">
+                                <span class="fw-bold small text-uppercase"><i class="bi bi-terminal-fill text-warning me-2"></i>Consultas Taller 5</span>
+                                <span class="badge bg-danger">9 Reportes</span>
+                            </div>
+                            <div class="list-group list-group-flush" id="menuConsultas">
+                                <button class="list-group-item list-group-item-action query-item" data-q="q1" onclick="ejecutarConsulta('q1', this)">
+                                    <span><i class="bi bi-fonts me-2"></i>Nombres en Mayúsculas</span>
+                                    <span class="badge bg-light text-dark border badge-q">Q1</span>
+                                </button>
+                                <button class="list-group-item list-group-item-action query-item" data-q="q2" onclick="ejecutarConsulta('q2', this)">
+                                    <span><i class="bi bi-rulers me-2"></i>Longitud de Nombres</span>
+                                    <span class="badge bg-light text-dark border badge-q">Q2</span>
+                                </button>
+                                <button class="list-group-item list-group-item-action query-item" data-q="q3" onclick="ejecutarConsulta('q3', this)">
+                                    <span><i class="bi bi-calculator me-2"></i>Promedio General de Notas</span>
+                                    <span class="badge bg-light text-dark border badge-q">Q3</span>
+                                </button>
+                                <button class="list-group-item list-group-item-action query-item" data-q="q4" onclick="ejecutarConsulta('q4', this)">
+                                    <span><i class="bi bi-bar-chart-steps me-2"></i>Nota Máxima y Mínima</span>
+                                    <span class="badge bg-light text-dark border badge-q">Q4</span>
+                                </button>
+                                <button class="list-group-item list-group-item-action query-item active-query" data-q="q5" onclick="ejecutarConsulta('q5', this)">
+                                    <span><i class="bi bi-check2-circle me-2"></i>Clasificación CASE</span>
+                                    <span class="badge bg-light text-dark border badge-q">Q5</span>
+                                </button>
+                                <button class="list-group-item list-group-item-action query-item" data-q="q6" onclick="ejecutarConsulta('q6', this)">
+                                    <span><i class="bi bi-diagram-3 me-2"></i>Estudiantes por Programa</span>
+                                    <span class="badge bg-light text-dark border badge-q">Q6</span>
+                                </button>
+                                <button class="list-group-item list-group-item-action query-item" data-q="q7" onclick="ejecutarConsulta('q7', this)">
+                                    <span><i class="bi bi-funnel me-2"></i>Programas (> 20 alumnos)</span>
+                                    <span class="badge bg-light text-dark border badge-q">Q7</span>
+                                </button>
+                                <button class="list-group-item list-group-item-action query-item" data-q="q8" onclick="ejecutarConsulta('q8', this)">
+                                    <span><i class="bi bi-calendar-check me-2"></i>Días desde Matrícula</span>
+                                    <span class="badge bg-light text-dark border badge-q">Q8</span>
+                                </button>
+                                <button class="list-group-item list-group-item-action query-item" data-q="q9" onclick="ejecutarConsulta('q9', this)">
+                                    <span><i class="bi bi-envelope-exclamation me-2"></i>Validar Correos Nulos</span>
+                                    <span class="badge bg-light text-dark border badge-q">Q9</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="card-modern p-4">
+                            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 pb-3 mb-3 border-bottom">
+                                <div>
+                                    <span class="text-uppercase text-danger fw-bold small d-block">Resultado en Tiempo Real</span>
+                                    <h5 class="mb-0 fw-bold text-dark" id="tituloResultado">Cargando consulta...</h5>
+                                </div>
+                                <span class="badge bg-dark-subtle text-dark px-3 py-2 rounded-pill fw-semibold" id="contadorFilas">0 registros</span>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="small text-muted fw-semibold"><i class="bi bi-filetype-sql me-1"></i>Sentencia SQL ejecutada:</span>
+                                    <button class="btn btn-sm btn-outline-secondary py-0 px-2" style="font-size: 0.75rem;" onclick="copiarSQL()">
+                                        <i class="bi bi-clipboard me-1"></i>Copiar SQL
+                                    </button>
+                                </div>
+                                <div class="sql-console p-3 shadow-sm" id="sqlEjecutado">SELECT * FROM public.estudiante;</div>
+                            </div>
+
+                            <div class="table-responsive rounded-3 border">
+                                <table class="table table-hover table-modern align-middle mb-0" id="tablaResultados">
+                                    <thead id="tablaHead"></thead>
+                                    <tbody id="tablaBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =================================================================
+                 PESTAÑA 2: ESTUDIANTES SEPARADOS POR PROGRAMA Y NOTAS
+            ================================================================== -->
+            <div class="tab-pane fade" id="paneEstudiantes">
+                <div class="row g-4">
+                    <!-- Formulario Matricular Estudiante -->
+                    <div class="col-lg-4">
+                        <div class="card-modern p-4">
+                            <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+                                <div class="bg-danger-subtle text-danger p-2 rounded-3">
+                                    <i class="bi bi-person-plus-fill fs-5"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">Matricular Estudiante</h6>
+                                    <small class="text-muted">Asignación a programa y nota</small>
+                                </div>
+                            </div>
+
+                            <form id="formEstudiante">
+                                <div class="mb-2">
+                                    <label class="form-label small fw-semibold mb-1">Documento de Identidad</label>
+                                    <input type="number" id="estu_documento" class="form-control form-control-sm campo-protegido" placeholder="Ej: 1005123456" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small fw-semibold mb-1">Nombre Completo</label>
+                                    <input type="text" id="estu_nombre" class="form-control form-control-sm campo-protegido" placeholder="Ej: Camila Andrea Rojas" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small fw-semibold mb-1">Correo Institucional (Opcional)</label>
+                                    <input type="email" id="estu_correo" class="form-control form-control-sm campo-protegido" placeholder="Dejar vacío para probar NULL">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small fw-semibold mb-1">Programa Académico</label>
+                                    <select id="estu_programa" class="form-select form-select-sm campo-protegido" required></select>
+                                </div>
+                                <div class="row g-2 mb-2">
+                                    <div class="col-5">
+                                        <label class="form-label small fw-semibold mb-1">Nota (0 - 5)</label>
+                                        <input type="number" step="0.1" min="0" max="5" id="estu_nota" class="form-control form-control-sm campo-protegido" placeholder="Ej: 4.5" required>
+                                    </div>
+                                    <div class="col-7">
+                                        <label class="form-label small fw-semibold mb-1">Asignatura</label>
+                                        <select id="mate_id" class="form-select form-select-sm campo-protegido" required></select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small fw-semibold mb-1">Clave Portal Estudiante (Default: 1234)</label>
+                                    <input type="text" id="estu_password" class="form-control form-control-sm campo-protegido" placeholder="1234">
+                                </div>
+                                <button type="submit" class="btn btn-ut w-100 py-2 btn-protegido">
+                                    <i class="bi bi-check-circle-fill me-1"></i> Guardar Estudiante
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Listas Separadas por Programa Académico -->
+                    <div class="col-lg-8">
+                        <div class="card-modern p-3 mb-4 d-flex flex-wrap justify-content-between align-items-center gap-2">
+                            <div class="fw-bold text-dark">
+                                <i class="bi bi-funnel-fill text-danger me-2"></i>Filtrar Lista por Programa Académico:
+                            </div>
+                            <select id="filtroProgramaEstudiantes" class="form-select form-select-sm" style="max-width: 320px;" onchange="renderizarListasPorPrograma()">
+                                <option value="TODOS">Mostrar todos los programas (Listas separadas)</option>
+                            </select>
+                        </div>
+
+                        <!-- Contenedor donde se dibujan las tarjetas independientes por cada Programa -->
+                        <div id="contenedorListasPorPrograma"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =================================================================
+                 PESTAÑA 3: GESTIÓN DE PROGRAMAS ACADÉMICOS (CREAR Y MODIFICAR)
+            ================================================================== -->
+            <div class="tab-pane fade" id="paneProgramas">
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <div class="card-modern p-4">
+                            <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+                                <div class="bg-primary-subtle text-primary p-2 rounded-3">
+                                    <i class="bi bi-mortarboard-fill fs-5"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">Añadir Nuevo Programa</h6>
+                                    <small class="text-muted">Oferta académica IDEAD</small>
+                                </div>
+                            </div>
+                            <form id="formPrograma">
+                                <div class="mb-3">
+                                    <label class="form-label small fw-semibold mb-1">Nombre del Programa Académico</label>
+                                    <input type="text" id="nuevo_prog_nombre" class="form-control campo-protegido" placeholder="Ej: Licenciatura en Ciencias Naturales" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold btn-protegido">
+                                    <i class="bi bi-plus-circle me-1"></i> Registrar Programa
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="card-modern p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                                <div>
+                                    <h6 class="mb-0 fw-bold"><i class="bi bi-pencil-square text-primary me-2"></i>Programas Registrados (Edición en Vivo)</h6>
+                                    <small class="text-muted">Al modificar el nombre de un programa se actualiza automáticamente en todos sus estudiantes</small>
+                                </div>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle">UPDATE Programa</span>
+                            </div>
+
+                            <div class="table-responsive rounded-3 border">
+                                <table class="table table-hover table-modern align-middle mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center" style="width: 70px;">ID</th>
+                                            <th>Nombre del Programa Académico</th>
+                                            <th class="text-center" style="width: 140px;">Estudiantes</th>
+                                            <th class="text-center" style="width: 140px;">Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablaEdicionProgramas"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =================================================================
+                 PESTAÑA 4: MATERIAS, DOCENTES Y AULAS
+            ================================================================== -->
+            <div class="tab-pane fade" id="paneAcademico">
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <div class="card-modern p-4 mb-4">
+                            <h6 class="fw-bold mb-3 pb-2 border-bottom"><i class="bi bi-journal-plus text-primary me-2"></i>Añadir Nueva Materia</h6>
+                            <form id="formMateria">
+                                <input type="text" id="mate_nombre" class="form-control form-control-sm mb-2 campo-protegido" placeholder="Nombre Asignatura (Ej: Base de Datos II)" required>
+                                <input type="number" id="mate_codigo" class="form-control form-control-sm mb-2 campo-protegido" placeholder="Código Materia (Ej: 112)" required>
+                                <label class="form-label small text-muted mb-1">Salón / Recurso Físico:</label>
+                                <select id="refi_id" class="form-select form-select-sm mb-2 campo-protegido" required></select>
+                                <label class="form-label small text-muted mb-1">Docente Titular:</label>
+                                <select id="prof_id" class="form-select form-select-sm mb-3 campo-protegido" required></select>
+                                <button type="submit" class="btn btn-primary btn-sm w-100 py-2 fw-semibold btn-protegido">
+                                    <i class="bi bi-plus-circle me-1"></i> Registrar Materia
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="card-modern p-4">
+                            <h6 class="fw-bold mb-3 pb-2 border-bottom"><i class="bi bi-building-add text-warning me-2"></i>Añadir Salón / Recurso Físico</h6>
+                            <form id="formRecurso">
+                                <input type="text" id="refi_descripcion" class="form-control form-control-sm mb-2 campo-protegido" placeholder="Nombre Espacio (Ej: SALA SISTEMAS 3)" required>
+                                <input type="number" id="refi_capacidad" class="form-control form-control-sm mb-3 campo-protegido" placeholder="Capacidad de estudiantes (Ej: 30)" required>
+                                <button type="submit" class="btn btn-warning btn-sm w-100 py-2 fw-semibold text-dark btn-protegido">
+                                    <i class="bi bi-plus-square me-1"></i> Guardar Recurso Físico
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="card-modern p-4 mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                                <h6 class="mb-0 fw-bold"><i class="bi bi-pencil-square text-primary me-2"></i>Asignación Académica (Reasignar Docente o Salón)</h6>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle">UPDATE Materia</span>
+                            </div>
+                            <div class="table-responsive rounded-3 border">
+                                <table class="table table-sm table-modern align-middle mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">ID</th>
+                                            <th>Asignatura</th>
+                                            <th>Docente Asignado</th>
+                                            <th>Salón / Recurso</th>
+                                            <th class="text-center">Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablaEdicionMaterias"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card-modern p-3 h-100">
+                                    <div class="fw-bold text-success small text-uppercase mb-3 pb-2 border-bottom">
+                                        <i class="bi bi-person-badge-fill me-1"></i>Planta Docente (IDs Auto-ajustables)
+                                    </div>
+                                    <ul class="list-unstyled mb-0" id="listaProfesores"></ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-modern p-3 h-100">
+                                    <div class="fw-bold text-danger small text-uppercase mb-3 pb-2 border-bottom">
+                                        <i class="bi bi-door-open-fill me-1"></i>Aulas y Recursos Físicos
+                                    </div>
+                                    <ul class="list-unstyled mb-0" id="listaAulas"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- MODAL DE INICIO DE SESIÓN (DOCENTE Y ESTUDIANTE) -->
+    <div class="modal fade" id="modalAuth" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header ut-hero-header border-0 py-3">
+                    <h5 class="modal-title fw-bold">
+                        <i class="bi bi-shield-lock-fill text-warning me-2"></i>Portal de Acceso — Universidad del Tolima
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4 bg-white">
+                    <ul class="nav nav-pills nav-fill bg-light p-1 rounded-3 mb-4" role="tablist">
+                        <li class="nav-item">
+                            <button class="nav-link active fw-semibold small" data-bs-toggle="tab" data-bs-target="#tabLoginEstu" type="button">
+                                <i class="bi bi-mortarboard-fill me-1"></i>Soy Estudiante
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link fw-semibold small" data-bs-toggle="tab" data-bs-target="#tabLoginDoc" type="button">
+                                <i class="bi bi-person-badge-fill me-1"></i>Soy Docente
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link fw-semibold small" data-bs-toggle="tab" data-bs-target="#tabRegistroDoc" type="button">
+                                <i class="bi bi-person-plus-fill me-1"></i>Registro Docente
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <!-- Pestaña 1: Login Estudiante -->
+                        <div class="tab-pane fade show active" id="tabLoginEstu">
+                            <form id="formLoginEstudiante">
+                                <div class="mb-3">
+                                    <label class="form-label small fw-semibold">Número de Documento o Correo</label>
+                                    <input type="text" id="estu_login_id" class="form-control" placeholder="Ej: 1005789123" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small fw-semibold">Contraseña</label>
+                                    <input type="password" id="estu_login_pass" class="form-control" placeholder="Ingresa tu clave" required>
+                                </div>
+                                <div class="alert alert-info small py-2 mb-3">
+                                    <i class="bi bi-info-circle-fill me-1"></i>
+                                    Ingresa con tu documento de identidad. Clave inicial por defecto: <code>1234</code>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">
+                                    Consultar Mis Calificaciones
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Pestaña 2: Login Docente -->
+                        <div class="tab-pane fade" id="tabLoginDoc">
+                            <form id="formLoginDocente">
+                                <div class="mb-3">
+                                    <label class="form-label small fw-semibold">Correo Institucional o Cédula</label>
+                                    <input type="text" id="login_identificador" class="form-control" placeholder="Ej: fandrade@ut.edu.co" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small fw-semibold">Contraseña</label>
+                                    <input type="password" id="login_password" class="form-control" placeholder="Ingresa tu clave" required>
+                                </div>
+                                <div class="alert alert-light border small py-2 mb-3">
+                                    <i class="bi bi-info-circle-fill text-primary me-1"></i>
+                                    Docentes precargados ingresan con la clave: <code>1234</code>
+                                </div>
+                                <button type="submit" class="btn btn-ut w-100 py-2">
+                                    Entrar al Panel Docente
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Pestaña 3: Registro Docente -->
+                        <div class="tab-pane fade" id="tabRegistroDoc">
+                            <form id="formProfesor">
+                                <div class="mb-2">
+                                    <label class="form-label small fw-semibold mb-1">Cédula de Ciudadanía</label>
+                                    <input type="number" id="prof_documento" class="form-control form-control-sm" placeholder="Ej: 93456789" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small fw-semibold mb-1">Nombre Completo</label>
+                                    <input type="text" id="prof_nombre" class="form-control form-control-sm" placeholder="Ej: Camilo Andrés Torres" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small fw-semibold mb-1">Correo Institucional</label>
+                                    <input type="email" id="prof_correo" class="form-control form-control-sm" placeholder="Ej: ctorres@ut.edu.co" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small fw-semibold mb-1">Crear Contraseña (mín. 4 caracteres)</label>
+                                    <input type="password" id="prof_password" class="form-control form-control-sm" placeholder="Crea tu clave" required>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100 fw-semibold py-2">
+                                    Crear Cuenta Docente
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICACIONES -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+        <div id="liveToast" class="toast align-items-center text-white bg-dark border-0 shadow-lg" role="alert">
+            <div class="d-flex">
+                <div class="toast-body d-flex align-items-center gap-2" id="toastMensaje"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-4 mt-auto">
+        <div class="container text-center small">
+            <div class="text-white fw-bold">UNIVERSIDAD DEL TOLIMA — Instituto de Educación a Distancia (IDEAD)</div>
+            <div>Barrio Santa Helena Parte Alta • Ibagué, Tolima, Colombia • Vigilada MinEducación</div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let consultaActual = 'q5';
+        let catalogoGlobal = { materias: [], profesores: [], recursos: [], programas: [], estudiantes: [] };
+        let docenteActual = JSON.parse(localStorage.getItem('docenteUT')) || null;
+        let estudianteActual = JSON.parse(localStorage.getItem('estudianteUT')) || null;
+
+        function mostrarNotificacion(mensaje, tipo = 'success') {
+            const toastEl = document.getElementById('liveToast');
+            const toastBody = document.getElementById('toastMensaje');
+            toastEl.className = `toast align-items-center text-white border-0 shadow-lg bg-${tipo === 'error' ? 'danger' : 'dark'}`;
+            const icono = tipo === 'error' ? 'bi-exclamation-triangle-fill text-warning' : 'bi-check-circle-fill text-success';
+            toastBody.innerHTML = `<i class="bi ${icono} fs-5"></i><span>${mensaje}</span>`;
+            new bootstrap.Toast(toastEl, { delay: 3800 }).show();
+        }
+
+        function copiarSQL() {
+            navigator.clipboard.writeText(document.getElementById('sqlEjecutado').innerText);
+            mostrarNotificacion('Sentencia SQL copiada al portapapeles.');
+        }
+
+        function headersDocente() {
+            return {
+                'Content-Type': 'application/json',
+                'x-docente-id': docenteActual ? docenteActual.prof_id : ''
+            };
+        }
+
+        function actualizarEstadoSesionUI() {
+            const zona = document.getElementById('zonaSesion');
+            const banner = document.getElementById('bannerPermisos');
+            const panelEstu = document.getElementById('panelBoletinEstudiante');
+            const campos = document.querySelectorAll('.campo-protegido, .btn-protegido');
+
+            if (docenteActual) {
+                zona.innerHTML = `
+                    <div class="d-flex align-items-center gap-2 bg-dark bg-opacity-75 px-3 py-1 rounded-pill border border-warning border-opacity-50">
+                        <i class="bi bi-person-check-fill text-warning"></i>
+                        <span class="small">Docente: <strong>${docenteActual.prof_nombre}</strong></span>
+                        <button class="btn btn-sm btn-outline-light py-0 px-2 rounded-pill" style="font-size: 0.75rem;" onclick="cerrarSesion()">Salir</button>
+                    </div>
+                `;
+                banner.classList.add('d-none');
+                panelEstu.classList.add('d-none');
+                campos.forEach(el => el.disabled = false);
+            } else if (estudianteActual) {
+                zona.innerHTML = `
+                    <div class="d-flex align-items-center gap-2 bg-primary px-3 py-1 rounded-pill border border-light border-opacity-50">
+                        <i class="bi bi-mortarboard-fill text-white"></i>
+                        <span class="small">Estudiante: <strong>${estudianteActual.estu_nombre}</strong></span>
+                        <button class="btn btn-sm btn-light text-primary py-0 px-2 rounded-pill fw-bold" style="font-size: 0.75rem;" onclick="cerrarSesion()">Salir</button>
+                    </div>
+                `;
+                banner.classList.add('d-none');
+                panelEstu.classList.remove('d-none');
+                campos.forEach(el => el.disabled = true);
+                renderizarBoletinEstudiante();
+            } else {
+                zona.innerHTML = `
+                    <button class="btn btn-warning btn-sm fw-bold px-3 rounded-pill shadow-sm" data-bs-toggle="modal" data-bs-target="#modalAuth">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión (Estudiante / Docente)
+                    </button>
+                `;
+                banner.classList.remove('d-none');
+                panelEstu.classList.add('d-none');
+                campos.forEach(el => el.disabled = true);
+            }
+        }
+
+        function cerrarSesion() {
+            docenteActual = null;
+            estudianteActual = null;
+            localStorage.removeItem('docenteUT');
+            localStorage.removeItem('estudianteUT');
+            mostrarNotificacion('Sesión cerrada.');
+            refrescarTodo();
+        }
+
+        function renderizarBoletinEstudiante() {
+            if (!estudianteActual) return;
+            const nota = parseFloat(estudianteActual.estu_nota) || 0;
+            const estado = nota >= 4.5 ? 'Excelente' : (nota >= 3.0 ? 'Aprobado' : 'Reprobado');
+            const badgeColor = nota >= 4.5 ? 'success' : (nota >= 3.0 ? 'primary' : 'danger');
+
+            document.getElementById('contenidoBoletin').innerHTML = `
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-5 border-end">
+                        <div class="text-muted small text-uppercase fw-bold">Estudiante Matriculado</div>
+                        <h4 class="fw-bold mb-1">${estudianteActual.estu_nombre}</h4>
+                        <div class="small text-muted">Documento: <strong>${estudianteActual.estu_documento}</strong></div>
+                        <div class="small text-muted">Programa: <span class="badge bg-dark">${estudianteActual.estu_programa}</span></div>
+                        <div class="small text-muted mt-1">Correo: ${estudianteActual.estu_correo || 'No registrado'}</div>
+                    </div>
+                    <div class="col-md-4 border-end">
+                        <div class="text-muted small text-uppercase fw-bold">Asignatura Inscrita</div>
+                        <h5 class="fw-bold text-primary mb-1">${estudianteActual.mate_nombre || 'Sin asignar'}</h5>
+                        <div class="small text-muted"><i class="bi bi-person-badge me-1"></i>Docente: <strong>${estudianteActual.prof_nombre || 'Por definir'}</strong></div>
+                        <div class="small text-muted"><i class="bi bi-door-open me-1"></i>Aula: <strong>${estudianteActual.refi_descripcion || 'Por definir'}</strong></div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="text-muted small text-uppercase fw-bold">Calificación Final</div>
+                        <div class="display-5 fw-extrabold text-${badgeColor} my-1">${nota.toFixed(1)}</div>
+                        <span class="badge bg-${badgeColor} px-3 py-2 rounded-pill fs-6">${estado}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function actualizarBoletinEstudiante() {
+            if (!estudianteActual) return;
+            const res = await fetch(`/api/estudiantes/${estudianteActual.estu_id}/boletin`);
+            const data = await res.json();
+            if (!data.error) {
+                estudianteActual = data;
+                localStorage.setItem('estudianteUT', JSON.stringify(data));
+                renderizarBoletinEstudiante();
+                mostrarNotificacion('Boletín actualizado desde PostgreSQL.');
+            }
+        }
+
+        async function refrescarTodo() {
+            actualizarEstadoSesionUI();
+            await cargarCatalogosYMetricas();
+            const btnActivo = document.querySelector(`[data-q="${consultaActual}"]`);
+            await ejecutarConsulta(consultaActual, btnActivo);
+        }
+
+        async function cargarCatalogosYMetricas() {
+            const resCat = await fetch('/api/catalogos');
+            const cat = await resCat.json();
+            if (cat.error) return;
+            catalogoGlobal = cat;
+
+            document.getElementById('kpiEstudiantes').innerText = cat.estudiantes.length;
+            document.getElementById('kpiProgramas').innerText = cat.programas.length;
+            document.getElementById('kpiMateriasAulas').innerText = `${cat.materias.length} / ${cat.recursos.length}`;
+
+            const bloqueado = !docenteActual ? 'disabled' : '';
+
+            // 1. Selectores de Programas (en matrícula y en filtro de listas)
+            const selProgMat = document.getElementById('estu_programa');
+            const selFiltroProg = document.getElementById('filtroProgramaEstudiantes');
+            const filtroPrevio = selFiltroProg.value;
+
+            selProgMat.innerHTML = '';
+            selFiltroProg.innerHTML = '<option value="TODOS">Mostrar todos los programas (Listas separadas)</option>';
+            cat.programas.forEach(p => {
+                selProgMat.innerHTML += `<option value="${p.prog_nombre}">${p.prog_nombre}</option>`;
+                selFiltroProg.innerHTML += `<option value="${p.prog_nombre}">${p.prog_nombre}</option>`;
+            });
+            if ([...selFiltroProg.options].some(o => o.value === filtroPrevio)) {
+                selFiltroProg.value = filtroPrevio;
+            }
+
+            // 2. Tabla de Gestión de Programas (Pestaña 3)
+            const tablaProg = document.getElementById('tablaEdicionProgramas');
+            tablaProg.innerHTML = '';
+            cat.programas.forEach(p => {
+                const conteo = cat.estudiantes.filter(e => e.estu_programa === p.prog_nombre).length;
+                tablaProg.innerHTML += `
+                    <tr>
+                        <td class="fw-bold text-center">${p.prog_id}</td>
+                        <td>
+                            <input type="text" id="edit_prog_${p.prog_id}" class="form-control form-control-sm fw-semibold" value="${p.prog_nombre}" ${bloqueado}>
+                        </td>
+                        <td class="text-center">
+                            <span class="badge bg-dark-subtle text-dark rounded-pill px-3">${conteo} estudiante(s)</span>
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-outline-primary fw-semibold" ${bloqueado} onclick="actualizarPrograma(${p.prog_id})">
+                                <i class="bi bi-check2"></i> Guardar
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // 3. Renderizar listas separadas por programa
+            renderizarListasPorPrograma();
+
+            // 4. Select materias
+            const selectMateria = document.getElementById('mate_id');
+            selectMateria.innerHTML = '';
+            cat.materias.forEach(m => {
+                selectMateria.innerHTML += `<option value="${m.mate_id}">ID ${m.mate_id} - ${m.mate_nombre}</option>`;
+            });
+
+            // 5. Select recursos y lista visual
+            const selectRecurso = document.getElementById('refi_id');
+            const listaAulas = document.getElementById('listaAulas');
+            selectRecurso.innerHTML = '';
+            listaAulas.innerHTML = '';
+            cat.recursos.forEach(r => {
+                selectRecurso.innerHTML += `<option value="${r.refi_id}">ID ${r.refi_id} - ${r.refi_descripcion} (Cap: ${r.refi_capacidad})</option>`;
+                listaAulas.innerHTML += `
+                    <li class="mb-2 d-flex justify-content-between align-items-center bg-light p-2 rounded border">
+                        <div><span class="badge bg-danger me-1">ID ${r.refi_id}</span> <strong>${r.refi_descripcion}</strong></div>
+                        <span class="badge bg-white text-dark border">Cap. ${r.refi_capacidad}</span>
+                    </li>
+                `;
+            });
+
+            // 6. Select profesores y lista visual con botón eliminar
+            const selectProfesor = document.getElementById('prof_id');
+            const listaProfesores = document.getElementById('listaProfesores');
+            selectProfesor.innerHTML = '';
+            listaProfesores.innerHTML = '';
+            cat.profesores.forEach(p => {
+                selectProfesor.innerHTML += `<option value="${p.prof_id}">ID ${p.prof_id} - ${p.prof_nombre}</option>`;
+                listaProfesores.innerHTML += `
+                    <li class="mb-2 d-flex justify-content-between align-items-center bg-light p-2 rounded border">
+                        <div>
+                            <span class="badge bg-success me-1">ID ${p.prof_id}</span>
+                            <strong>${p.prof_nombre}</strong>
+                            <div class="text-muted" style="font-size: 0.75rem;">CC: ${p.prof_documento} • ${p.prof_correo || 'Sin correo'}</div>
+                        </div>
+                        <button class="btn btn-sm btn-outline-danger" ${bloqueado} onclick="eliminarDocente(${p.prof_id}, '${p.prof_nombre}')">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </li>
+                `;
+            });
+
+            // 7. Tabla Asignación Académica (Materias)
+            const tablaEdicion = document.getElementById('tablaEdicionMaterias');
+            tablaEdicion.innerHTML = '';
+            cat.materias.forEach(m => {
+                let opcionesProf = cat.profesores.map(p => `<option value="${p.prof_id}" ${p.prof_id === m.prof_id ? 'selected' : ''}>ID ${p.prof_id} - ${p.prof_nombre}</option>`).join('');
+                let opcionesRefi = cat.recursos.map(r => `<option value="${r.refi_id}" ${r.refi_id === m.refi_id ? 'selected' : ''}>ID ${r.refi_id} - ${r.refi_descripcion}</option>`).join('');
+
+                tablaEdicion.innerHTML += `
+                    <tr>
+                        <td class="fw-bold text-center">${m.mate_id}</td>
+                        <td><strong>${m.mate_nombre}</strong> <span class="badge bg-light text-dark border">Cód. ${m.mate_codigo}</span></td>
+                        <td><select id="edit_prof_${m.mate_id}" class="form-select form-select-sm" ${bloqueado}>${opcionesProf}</select></td>
+                        <td><select id="edit_refi_${m.mate_id}" class="form-select form-select-sm" ${bloqueado}>${opcionesRefi}</select></td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-outline-primary fw-semibold" ${bloqueado} onclick="actualizarMateria(${m.mate_id})">
+                                <i class="bi bi-check2"></i> Guardar
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // 8. KPI Promedio General
+            const resProm = await fetch('/api/reportes/q3');
+            const prom = await resProm.json();
+            if (!prom.error && prom.datos[0]) {
+                document.getElementById('kpiPromedio').innerText = prom.datos[0].promedio_general || '0.0';
+            }
+        }
+
+        // Renderizar listas independientes de estudiantes agrupadas por Programa Académico
+        function renderizarListasPorPrograma() {
+            const contenedor = document.getElementById('contenedorListasPorPrograma');
+            const filtro = document.getElementById('filtroProgramaEstudiantes').value;
+            const bloqueado = !docenteActual ? 'disabled' : '';
+
+            contenedor.innerHTML = '';
+
+            const programasAMostrar = filtro === 'TODOS'
+                ? catalogoGlobal.programas.map(p => p.prog_nombre)
+                : [filtro];
+
+            programasAMostrar.forEach(nombreProg => {
+                const alumnos = catalogoGlobal.estudiantes.filter(e => e.estu_programa === nombreProg);
+
+                let filasHtml = '';
+                if (alumnos.length === 0) {
+                    filasHtml = `<tr><td colspan="6" class="text-center text-muted py-3 small">No hay estudiantes matriculados en este programa todavía.</td></tr>`;
+                } else {
+                    alumnos.forEach(e => {
+                        const notaVal = parseFloat(e.estu_nota) || 0;
+                        const estadoTexto = notaVal >= 4.5 ? 'Excelente' : (notaVal >= 3.0 ? 'Aprobado' : 'Reprobado');
+                        const estadoBadge = notaVal >= 4.5 ? 'success' : (notaVal >= 3.0 ? 'primary' : 'danger');
+
+                        filasHtml += `
+                            <tr>
+                                <td class="fw-bold text-center">${e.estu_id}</td>
+                                <td>
+                                    <strong>${e.estu_nombre}</strong>
+                                    <div class="text-muted" style="font-size: 0.75rem;">CC: ${e.estu_documento}</div>
+                                </td>
+                                <td class="small"><span class="badge bg-light text-dark border">${e.mate_nombre || 'Sin materia'}</span></td>
+                                <td><span class="badge bg-${estadoBadge} rounded-pill">${estadoTexto}</span></td>
+                                <td style="width: 95px;">
+                                    <input type="number" step="0.1" min="0" max="5" id="edit_nota_${e.estu_id}" class="form-control form-control-sm fw-bold text-center" value="${e.estu_nota}" ${bloqueado}>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-ut" ${bloqueado} title="Guardar nota" onclick="actualizarNota(${e.estu_id}, '${e.estu_nombre}')">
+                                        <i class="bi bi-save"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                }
+
+                contenedor.innerHTML += `
+                    <div class="card-modern overflow-hidden mb-4">
+                        <div class="program-header-card p-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-warning small text-uppercase fw-bold d-block" style="font-size: 0.7rem;">Programa Académico</span>
+                                <h6 class="mb-0 fw-bold">${nombreProg}</h6>
+                            </div>
+                            <span class="badge bg-warning text-dark rounded-pill px-3 py-2 fw-bold">
+                                ${alumnos.length} Estudiante(s)
+                            </span>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-modern align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">ID</th>
+                                        <th>Estudiante</th>
+                                        <th>Asignatura</th>
+                                        <th>Estado</th>
+                                        <th>Nota</th>
+                                        <th class="text-center">Guardar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>${filasHtml}</tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Login Estudiante
+        document.getElementById('formLoginEstudiante').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const identificador = document.getElementById('estu_login_id').value;
+            const password = document.getElementById('estu_login_pass').value;
+
+            const res = await fetch('/api/login-estudiante', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ identificador, password })
+            });
+            const data = await res.json();
+            if (data.error) {
+                mostrarNotificacion(data.error, 'error');
+            } else {
+                docenteActual = null;
+                localStorage.removeItem('docenteUT');
+                estudianteActual = data;
+                localStorage.setItem('estudianteUT', JSON.stringify(data));
+                bootstrap.Modal.getInstance(document.getElementById('modalAuth')).hide();
+                e.target.reset();
+                mostrarNotificacion(`Bienvenido(a), ${data.estu_nombre}.`);
+                await refrescarTodo();
+            }
+        });
+
+        // Login Docente
+        document.getElementById('formLoginDocente').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const identificador = document.getElementById('login_identificador').value;
+            const password = document.getElementById('login_password').value;
+
+            const res = await fetch('/api/login-docente', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ identificador, password })
+            });
+            const data = await res.json();
+            if (data.error) {
+                mostrarNotificacion(data.error, 'error');
+            } else {
+                estudianteActual = null;
+                localStorage.removeItem('estudianteUT');
+                docenteActual = data;
+                localStorage.setItem('docenteUT', JSON.stringify(data));
+                bootstrap.Modal.getInstance(document.getElementById('modalAuth')).hide();
+                e.target.reset();
+                mostrarNotificacion(`Bienvenido(a), Prof. ${data.prof_nombre}. Permisos habilitados.`);
+                await refrescarTodo();
+            }
+        });
+
+        // Registro Nuevo Docente
+        document.getElementById('formProfesor').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = {
+                prof_documento: document.getElementById('prof_documento').value,
+                prof_nombre: document.getElementById('prof_nombre').value,
+                prof_correo: document.getElementById('prof_correo').value,
+                prof_password: document.getElementById('prof_password').value
+            };
+            const res = await fetch('/api/profesores', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.error) {
+                mostrarNotificacion(data.error, 'error');
+            } else {
+                estudianteActual = null;
+                localStorage.removeItem('estudianteUT');
+                docenteActual = data;
+                localStorage.setItem('docenteUT', JSON.stringify(data));
+                bootstrap.Modal.getInstance(document.getElementById('modalAuth')).hide();
+                e.target.reset();
+                mostrarNotificacion(`Cuenta docente creada (ID ${data.prof_id}).`);
+                await refrescarTodo();
+            }
+        });
+
+        // Añadir Programa Académico
+        document.getElementById('formPrograma').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const prog_nombre = document.getElementById('nuevo_prog_nombre').value;
+            const res = await fetch('/api/programas', {
+                method: 'POST',
+                headers: headersDocente(),
+                body: JSON.stringify({ prog_nombre })
+            });
+            const data = await res.json();
+            if (data.error) {
+                mostrarNotificacion(data.error, 'error');
+            } else {
+                mostrarNotificacion(`Programa "${data.prog_nombre}" registrado.`);
+                e.target.reset();
+                await refrescarTodo();
+            }
+        });
+
+        // Modificar Programa Académico
+        async function actualizarPrograma(progId) {
+            const prog_nombre = document.getElementById(`edit_prog_${progId}`).value;
+            const res = await fetch(`/api/programas/${progId}`, {
+                method: 'PUT',
+                headers: headersDocente(),
+                body: JSON.stringify({ prog_nombre })
+            });
+            const data = await res.json();
+            if (data.error) {
+                mostrarNotificacion(data.error, 'error');
+            } else {
+                mostrarNotificacion(`Programa actualizado a "${data.prog_nombre}".`);
+                await refrescarTodo();
+            }
+        }
+
+        // Actualizar nota
+        async function actualizarNota(estuId, nombre) {
+            const estu_nota = document.getElementById(`edit_nota_${estuId}`).value;
+            const res = await fetch(`/api/estudiantes/${estuId}/nota`, {
+                method: 'PUT',
+                headers: headersDocente(),
+                body: JSON.stringify({ estu_nota })
+            });
+            const data = await res.json();
+            if (data.error) {
+                mostrarNotificacion(data.error, 'error');
+            } else {
+                mostrarNotificacion(`Nota de ${nombre} actualizada a ${data.estu_nota}.`);
+                await refrescarTodo();
+            }
+        }
+
+        // Eliminar docente
+        async function eliminarDocente(profId, nombre) {
+            if (!confirm(`¿Eliminar al docente "${nombre}" (ID ${profId})? Los IDs se reordenarán automáticamente.`)) return;
+            const res = await fetch(`/api/profesores/${profId}`, {
+                method: 'DELETE',
+                headers: headersDocente()
+            });
+            const data = await res.json();
+            if (data.error) {
+                mostrarNotificacion(data.error, 'error');
+            } else {
+                if (docenteActual && docenteActual.prof_id === profId) {
+                    cerrarSesion();
+                    return;
+                }
+                mostrarNotificacion(`Docente "${nombre}" eliminado e IDs reordenados.`);
+                await refrescarTodo();
+            }
+        }
+
+        // Actualizar materia
+        async function actualizarMateria(mateId) {
+            const prof_id = document.getElementById(`edit_prof_${mateId}`).value;
+            const refi_id = document.getElementById(`edit_refi_${mateId}`).value;
+            const res = await fetch(`/api/materias/${mateId}`, {
+                method: 'PUT',
+                headers: headersDocente(),
+                body: JSON.stringify({ prof_id, refi_id })
+            });
+            const data = await res.json();
+            if (data.error) {
+                mostrarNotificacion(data.error, 'error');
+            } else {
+                mostrarNotificacion(`Asignación actualizada para "${data.mate_nombre}".`);
+                await refrescarTodo();
+            }
+        }
+
+        // Ejecutar consulta SQL
+        async function ejecutarConsulta(id, boton = null) {
+            consultaActual = id;
+            if (boton) {
+                document.querySelectorAll('#menuConsultas button').forEach(btn => btn.classList.remove('active-query'));
+                boton.classList.add('active-query');
+            }
+            const res = await fetch(`/api/reportes/${id}`);
+            const data = await res.json();
+            if (data.error) return;
+
+            document.getElementById('tituloResultado').innerText = data.titulo;
+            document.getElementById('sqlEjecutado').innerText = data.sql;
+            document.getElementById('contadorFilas').innerText = `${data.datos.length} registro(s)`;
+
+            const thead = document.getElementById('tablaHead');
+            const tbody = document.getElementById('tablaBody');
+            thead.innerHTML = '';
+            tbody.innerHTML = '';
+
+            if (data.datos.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-4">Sin registros para esta consulta.</td></tr>';
+                return;
+            }
+
+            const columnas = Object.keys(data.datos[0]);
+            thead.innerHTML = `<tr>${columnas.map(c => `<th>${c.replace('_', ' ')}</th>`).join('')}</tr>`;
+
+            data.datos.forEach(fila => {
+                let tr = '<tr>';
+                columnas.forEach(col => {
+                    let valor = fila[col];
+                    if (col === 'estado') {
+                        const color = valor === 'Excelente' ? 'success' : (valor === 'Aprobado' ? 'primary' : 'danger');
+                        valor = `<span class="badge bg-${color} px-3 py-1 rounded-pill">${valor}</span>`;
+                    } else if (col === 'correo' && valor === 'No registrado') {
+                        valor = `<span class="badge bg-warning text-dark px-2 py-1">${valor}</span>`;
+                    } else if (col === 'fecha_matricula' && valor) {
+                        valor = valor.split('T')[0];
+                    }
+                    tr += `<td>${valor}</td>`;
+                });
+                tr += '</tr>';
+                tbody.innerHTML += tr;
+            });
+        }
+
+        // Registrar Estudiante
+        document.getElementById('formEstudiante').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = {
+                estu_documento: document.getElementById('estu_documento').value,
+                estu_nombre: document.getElementById('estu_nombre').value,
+                estu_correo: document.getElementById('estu_correo').value,
+                estu_nota: document.getElementById('estu_nota').value,
+                estu_programa: document.getElementById('estu_programa').value,
+                mate_id: document.getElementById('mate_id').value,
+                estu_password: document.getElementById('estu_password').value
+            };
+            const res = await fetch('/api/estudiantes', {
+                method: 'POST',
+                headers: headersDocente(),
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.error) {
+                mostrarNotificacion(data.error, 'error');
+            } else {
+                mostrarNotificacion('Estudiante matriculado correctamente.');
+                e.target.reset();
+                await refrescarTodo();
+            }
+        });
+
+        // Registrar Materia
+        document.getElementById('formMateria').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = {
+                mate_nombre: document.getElementById('mate_nombre').value,
+                mate_codigo: document.getElementById('mate_codigo').value,
+                refi_id: document.getElementById('refi_id').value,
+                prof_id: document.getElementById('prof_id').value
+            };
+            const res = await fetch('/api/materias', {
+                method: 'POST',
+                headers: headersDocente(),
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.error) {
+                mostrarNotificacion(data.error, 'error');
+            } else {
+                mostrarNotificacion(`Materia "${data.mate_nombre}" creada.`);
+                e.target.reset();
+                await refrescarTodo();
+            }
+        });
+
+        // Registrar Salón
+        document.getElementById('formRecurso').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = {
+                refi_descripcion: document.getElementById('refi_descripcion').value,
+                refi_capacidad: document.getElementById('refi_capacidad').value
+            };
+            const res = await fetch('/api/recursos', {
+                method: 'POST',
+                headers: headersDocente(),
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.error) {
+                mostrarNotificacion(data.error, 'error');
+            } else {
+                mostrarNotificacion(`Salón "${data.refi_descripcion}" registrado.`);
+                e.target.reset();
+                await refrescarTodo();
+            }
+        });
+
+        refrescarTodo();
+    </script>
+</body>
+</html>
